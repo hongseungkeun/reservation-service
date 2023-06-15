@@ -2,8 +2,6 @@ package com.numble.reservation.domain.user.controller;
 
 import com.numble.reservation.domain.user.dto.request.JoinRequest;
 import com.numble.reservation.domain.user.dto.request.LoginRequest;
-import com.numble.reservation.domain.user.dto.response.JoinResponse;
-import com.numble.reservation.domain.user.dto.response.UserJoinResponse;
 import com.numble.reservation.domain.user.service.UserService;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
@@ -18,20 +16,18 @@ import org.springframework.web.bind.annotation.RestController;
 @RequestMapping("/users")
 @RequiredArgsConstructor
 public class UserController {
-    @Qualifier("UserServiceImpl")
+    @Qualifier("userServiceImpl")
     private final UserService userService;
 
     @PostMapping
-    public ResponseEntity<UserJoinResponse> join(@Valid @RequestBody JoinRequest request){
-        JoinResponse response = userService.joinUser(request);
-
-        return ResponseEntity.ok(response.toUserJoinResponse());
+    public ResponseEntity<Void> join(@Valid @RequestBody JoinRequest request){
+        userService.joinUser(request);
+        return ResponseEntity.ok().build();
     }
 
     @PostMapping("/login")
-    public ResponseEntity<UserJoinResponse> login(@Valid @RequestBody LoginRequest request){
+    public ResponseEntity<Void> login(@Valid @RequestBody LoginRequest request){
         userService.loginUser(request);
-
         return ResponseEntity.ok().build();
     }
 }
