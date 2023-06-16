@@ -1,8 +1,8 @@
-package com.numble.reservation.domain.user.controller;
+package com.numble.reservation.domain.user.business.controller;
 
+import com.numble.reservation.domain.user.service.UserService;
 import com.numble.reservation.domain.user.dto.request.JoinRequest;
 import com.numble.reservation.domain.user.dto.request.LoginRequest;
-import com.numble.reservation.domain.user.service.UserService;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Qualifier;
@@ -15,8 +15,8 @@ import org.springframework.web.bind.annotation.RestController;
 @RestController
 @RequestMapping("/businesses")
 @RequiredArgsConstructor
-public class BusinessController {
-    @Qualifier("businessServiceImpl")
+public class BusinessUserController {
+    @Qualifier("businessUserService")
     private final UserService userService;
 
     @PostMapping
