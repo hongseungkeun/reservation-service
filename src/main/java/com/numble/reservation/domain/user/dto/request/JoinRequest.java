@@ -13,6 +13,7 @@ public record JoinRequest(
         @Size(max = 20)
         String name,
         @NotBlank
+        @Size(max = 30)
         String email,
         @NotBlank
         @Size(max = 30)
