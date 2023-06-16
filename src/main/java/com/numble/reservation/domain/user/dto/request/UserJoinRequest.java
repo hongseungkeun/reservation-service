@@ -8,7 +8,7 @@ import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Size;
 
-public record JoinRequest(
+public record UserJoinRequest(
         @NotBlank
         @Size(max = 20)
         String name,
@@ -22,7 +22,7 @@ public record JoinRequest(
         String businessLicense,
         @NotNull Role type
 ) {
-    public CommonUser toUserJoin() {
+    public CommonUser toCommonUser() {
         return CommonUser.builder()
                 .userInfo(UserInfo.builder()
                         .name(this.name)
@@ -33,7 +33,7 @@ public record JoinRequest(
                 .build();
     }
 
-    public BusinessUser toBusinessJoin() {
+    public BusinessUser toBusinessUser() {
         return BusinessUser.builder()
                 .userInfo(UserInfo.builder()
                         .name(this.name)
