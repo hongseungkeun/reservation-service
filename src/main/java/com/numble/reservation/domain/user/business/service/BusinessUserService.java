@@ -27,7 +27,6 @@ public class BusinessUserService implements UserService {
     @Override
     public void loginUser(LoginRequest request) {
         findUserByEmail(request.email());
-
     }
 
     @Override

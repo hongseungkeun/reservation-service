@@ -22,14 +22,12 @@ public class BusinessUserController {
     @PostMapping
     public ResponseEntity<Void> join(@Valid @RequestBody JoinRequest request){
         userService.joinUser(request);
-
         return ResponseEntity.ok().build();
     }
 
     @PostMapping("/login")
     public ResponseEntity<Void> login(@Valid @RequestBody LoginRequest request){
         userService.loginUser(request);
-
         return ResponseEntity.ok().build();
     }
 }
