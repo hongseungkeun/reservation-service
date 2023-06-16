@@ -2,8 +2,9 @@ package com.numble.reservation.domain.user.common.service;
 
 import com.numble.reservation.domain.user.common.domain.CommonUser;
 import com.numble.reservation.domain.user.common.repository.CommonUserRepository;
-import com.numble.reservation.domain.user.dto.request.JoinRequest;
-import com.numble.reservation.domain.user.dto.request.LoginRequest;
+import com.numble.reservation.domain.user.dto.request.UserJoinRequest;
+import com.numble.reservation.domain.user.dto.request.UserLoginRequest;
+import com.numble.reservation.domain.user.dto.response.UserJoinResponse;
 import com.numble.reservation.domain.user.exception.UserNotFoundException;
 import com.numble.reservation.domain.user.service.UserService;
 import com.numble.reservation.global.exception.error.ErrorCode;
@@ -19,13 +20,13 @@ public class CommonUserService implements UserService {
 
     @Override
     @Transactional
-    public void joinUser(JoinRequest request) {
-        CommonUser user = request.toUserJoin();
-        userRepository.save(user);
+    public UserJoinResponse joinUser(UserJoinRequest request) {
+        CommonUser user = userRepository.save(request.toCommonUser());
+        return UserJoinResponse.from(user.getUserId());
     }
 
     @Override
-    public void loginUser(LoginRequest request) {
+    public void loginUser(UserLoginRequest request) {
         findUserByEmail(request.email());
     }
 
