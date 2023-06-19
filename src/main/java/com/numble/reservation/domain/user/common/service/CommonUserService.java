@@ -32,7 +32,7 @@ public class CommonUserService implements UserService {
 
     @Override
     public CommonUser findUserByEmail(String email){
-        return userRepository.findByEmail(email)
+        return userRepository.findByUserInfoEmail(email)
                 .orElseThrow(() -> new UserNotFoundException(ErrorCode.USER_NOT_FOUND));
     }
 }
