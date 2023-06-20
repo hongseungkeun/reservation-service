@@ -38,11 +38,13 @@ public class Venue {
     @Builder
     public Venue(String name,
                  int capacity,
+                 String venuesType,
                  String possibleTimes,
                  BusinessUser user,
                  List<Seat> seats) {
         this.name = name;
         this.capacity = capacity;
+        this.venuesType = venuesType;
         this.possibleTimes = possibleTimes;
         this.user = user;
         this.seats = seats;
