@@ -1,11 +1,12 @@
 package com.numble.reservation.domain.venue.seat.domain;
 
+import com.numble.reservation.domain.venue.domain.Venue;
+import com.numble.reservation.domain.venue.seat.data.Status;
 import jakarta.persistence.*;
 import lombok.AccessLevel;
 import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
-import org.hibernate.annotations.ColumnDefault;
 import org.hibernate.annotations.DynamicInsert;
 
 @Entity
@@ -19,19 +20,22 @@ public class Seat {
     @Column(nullable = false)
     private String seatNumber;
     @Column(nullable = false)
-    @ColumnDefault("0")
-    private boolean status;
+    @Enumerated(EnumType.STRING)
+    private Status status;
     @Column(nullable = false)
     private String seatType;
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "venue_id")
+    private Venue venue;
 
     @Builder
-    public Seat(Long seatId,
-                String seatNumber,
-                boolean status,
-                String seatType) {
-        this.seatId = seatId;
+    public Seat(String seatNumber,
+                Status status,
+                String seatType,
+                Venue venue) {
         this.seatNumber = seatNumber;
         this.status = status;
         this.seatType = seatType;
+        this.venue = venue;
     }
 }
