@@ -8,10 +8,7 @@ import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 @RestController
 @RequestMapping("/venues")
@@ -19,9 +16,9 @@ import org.springframework.web.bind.annotation.RestController;
 public class VenueController {
     private final VenueService venueService;
 
-    @PostMapping
-    public ResponseEntity<VenueRegisterResponse> register(@Valid @RequestBody VenueRegisterRequest request, BusinessUser user){
-        VenueRegisterResponse response = venueService.registerVenue(request, user);
+    @PostMapping({"/{email}"})
+    public ResponseEntity<VenueRegisterResponse> register(@Valid @RequestBody VenueRegisterRequest request, @PathVariable String email){
+        VenueRegisterResponse response = venueService.registerVenue(request, email);
         return ResponseEntity.status(HttpStatus.CREATED).body(response);
     }
 }

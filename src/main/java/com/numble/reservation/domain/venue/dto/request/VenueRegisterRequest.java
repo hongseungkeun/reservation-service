@@ -17,12 +17,9 @@ public record VenueRegisterRequest(
         return Venue.builder()
                 .name(this.name)
                 .capacity(this.capacity)
+                .venuesType(this.venuesType)
                 .possibleTimes(this.possibleTimes)
                 .user(user)
-                .seats(this.seats
-                        .stream()
-                        .map(SeatRegisterRequest::toSeat)
-                        .toList()
-                ).build();
+                .build();
     }
 }

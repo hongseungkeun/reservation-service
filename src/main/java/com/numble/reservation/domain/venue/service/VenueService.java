@@ -7,6 +7,7 @@ import com.numble.reservation.domain.venue.dto.request.VenueRegisterRequest;
 import com.numble.reservation.domain.venue.dto.response.VenueRegisterResponse;
 import com.numble.reservation.domain.venue.exception.VenueNotFoundException;
 import com.numble.reservation.domain.venue.repository.VenueRepository;
+import com.numble.reservation.domain.venue.seat.service.SeatService;
 import com.numble.reservation.global.exception.error.ErrorCode;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Qualifier;
@@ -19,10 +20,13 @@ import org.springframework.transaction.annotation.Transactional;
 public class VenueService {
     @Qualifier("businessUserService")
     private final UserService userService;
+    private final SeatService seatService;
     private final VenueRepository venueRepository;
+
     @Transactional
-    public VenueRegisterResponse registerVenue(VenueRegisterRequest request, BusinessUser user) {
-        Venue venue = venueRepository.save(request.toVenue(user));
+    public VenueRegisterResponse registerVenue(VenueRegisterRequest request, String email) {
+        Venue venue = venueRepository.save(request.toVenue((BusinessUser) userService.findUserByEmail(email)));
+        seatService.save(request.seats(), venue);
         return VenueRegisterResponse.from(venue.getVenueId());
     }
 
