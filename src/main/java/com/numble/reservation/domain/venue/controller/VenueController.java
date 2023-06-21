@@ -1,6 +1,5 @@
 package com.numble.reservation.domain.venue.controller;
 
-import com.numble.reservation.domain.user.business.domain.BusinessUser;
 import com.numble.reservation.domain.venue.dto.request.VenueRegisterRequest;
 import com.numble.reservation.domain.venue.dto.response.VenueRegisterResponse;
 import com.numble.reservation.domain.venue.service.VenueService;
