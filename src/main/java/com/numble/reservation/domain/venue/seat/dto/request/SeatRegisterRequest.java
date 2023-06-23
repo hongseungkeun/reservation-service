@@ -8,7 +8,7 @@ public record SeatRegisterRequest(
         String seatNumber,
         String seatType
 ) {
-    public Seat toSeat(Venue venue){
+    public Seat toSeat(Venue venue) {
         return Seat.builder()
                 .seatNumber(this.seatNumber)
                 .status(Status.AVAILABLE)

@@ -51,7 +51,7 @@ public class PerformanceService {
         return PerformanceSeatListResponse.from(performance);
     }
 
-    private Performance findPerformanceById(Long performanceId){
+    private Performance findPerformanceById(Long performanceId) {
         return performanceRepository.findById(performanceId)
                 .orElseThrow(() -> new PerformanceNotFoundException(ErrorCode.PERFORMANCE_NOT_FOUND));
     }

@@ -10,7 +10,7 @@ public record SeatListResponse(
         String seatNumber,
         String status
 ) {
-    public static SeatListResponse from(Seat seat){
+    public static SeatListResponse from(Seat seat) {
         return SeatListResponse.builder()
                 .seatId(seat.getSeatId())
                 .seatNumber(seat.getSeatNumber())

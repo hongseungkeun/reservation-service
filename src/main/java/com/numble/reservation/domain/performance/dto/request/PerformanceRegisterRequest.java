@@ -15,7 +15,7 @@ public record PerformanceRegisterRequest(
         String endTime,
         Map<String, Integer> prices
 ) {
-    public Performance toPerformance(BusinessUser user, Venue venue){
+    public Performance toPerformance(BusinessUser user, Venue venue) {
         return Performance.builder()
                 .name(this.name)
                 .capacity(this.capacity)

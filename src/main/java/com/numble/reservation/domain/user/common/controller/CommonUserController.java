@@ -22,13 +22,13 @@ public class CommonUserController {
     private final UserService userService;
 
     @PostMapping
-    public ResponseEntity<UserJoinResponse> join(@Valid @RequestBody UserJoinRequest request){
+    public ResponseEntity<UserJoinResponse> join(@Valid @RequestBody UserJoinRequest request) {
         UserJoinResponse response = userService.joinUser(request);
         return ResponseEntity.status(HttpStatus.CREATED).body(response);
     }
 
     @PostMapping("/login")
-    public ResponseEntity<Void> login(@Valid @RequestBody UserLoginRequest request){
+    public ResponseEntity<Void> login(@Valid @RequestBody UserLoginRequest request) {
         userService.loginUser(request);
         return ResponseEntity.ok().build();
     }

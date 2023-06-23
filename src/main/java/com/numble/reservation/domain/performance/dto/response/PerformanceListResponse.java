@@ -19,7 +19,7 @@ public record PerformanceListResponse(
         int ticketPrice,
         int availableSeats
 ) {
-    public static PerformanceListResponse from(Performance performance){
+    public static PerformanceListResponse from(Performance performance) {
         return PerformanceListResponse.builder()
                 .performanceId(performance.getPerformanceId())
                 .title(performance.getName())
@@ -31,11 +31,11 @@ public record PerformanceListResponse(
                 .build();
     }
 
-    private static int getMinTicketPrice(Map<String, Integer> prices){
+    private static int getMinTicketPrice(Map<String, Integer> prices) {
         return Collections.min(prices.values());
     }
 
-    private static int getAvailableSeats(List<Seat> seat){
+    private static int getAvailableSeats(List<Seat> seat) {
         return seat.stream()
                 .filter(s -> s.getStatus().equals(Status.AVAILABLE))
                 .toList()

@@ -22,19 +22,19 @@ public class PerformanceController {
     private final PerformanceService performanceService;
 
     @PostMapping("/{email}")
-    public ResponseEntity<PerformanceRegisterResponse> register(@Valid @RequestBody PerformanceRegisterRequest request, @PathVariable String email){
+    public ResponseEntity<PerformanceRegisterResponse> register(@Valid @RequestBody PerformanceRegisterRequest request, @PathVariable String email) {
         PerformanceRegisterResponse response = performanceService.registerPerformance(request, email);
         return ResponseEntity.status(HttpStatus.CREATED).body(response);
     }
 
     @GetMapping
-    public ResponseEntity<Page<PerformanceListResponse>> getList(@PageableDefault(sort = "performanceId", direction = Sort.Direction.DESC) Pageable pageable){
+    public ResponseEntity<Page<PerformanceListResponse>> getList(@PageableDefault(sort = "performanceId", direction = Sort.Direction.DESC) Pageable pageable) {
         Page<PerformanceListResponse> response = performanceService.getPerformanceList(pageable);
         return ResponseEntity.ok(response);
     }
 
     @GetMapping("/{performanceId}/seats")
-    public ResponseEntity<PerformanceSeatListResponse> getSeatList(@PathVariable Long performanceId){
+    public ResponseEntity<PerformanceSeatListResponse> getSeatList(@PathVariable Long performanceId) {
         PerformanceSeatListResponse response = performanceService.getSeatListById(performanceId);
         return ResponseEntity.ok(response);
     }

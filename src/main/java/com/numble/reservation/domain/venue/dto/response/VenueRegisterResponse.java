@@ -7,7 +7,7 @@ import lombok.Builder;
 public record VenueRegisterResponse(
         Long id
 ) {
-    public static VenueRegisterResponse from(Long id){
+    public static VenueRegisterResponse from(Long id) {
         return VenueRegisterResponse.builder()
                 .id(id)
                 .build();

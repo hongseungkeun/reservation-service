@@ -7,7 +7,7 @@ import lombok.Builder;
 public record UserJoinResponse(
         Long id
 ) {
-    public static UserJoinResponse from(Long id){
+    public static UserJoinResponse from(Long id) {
         return UserJoinResponse.builder()
                 .id(id)
                 .build();

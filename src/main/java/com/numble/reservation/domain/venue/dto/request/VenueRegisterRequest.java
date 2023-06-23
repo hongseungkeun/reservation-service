@@ -13,7 +13,7 @@ public record VenueRegisterRequest(
         String possibleTimes,
         List<SeatRegisterRequest> seats
 ) {
-    public Venue toVenue(BusinessUser user){
+    public Venue toVenue(BusinessUser user) {
         return Venue.builder()
                 .name(this.name)
                 .capacity(this.capacity)

@@ -13,14 +13,14 @@ public record PerformanceSeatListResponse(
         Long performanceId,
         List<SeatListResponse> seats
 ) {
-    public static PerformanceSeatListResponse from(Performance performance){
+    public static PerformanceSeatListResponse from(Performance performance) {
         return PerformanceSeatListResponse.builder()
                 .performanceId(performance.getPerformanceId())
                 .seats(getSeatList(performance.getVenue().getSeats()))
                 .build();
     }
 
-    private static List<SeatListResponse> getSeatList(List<Seat> seat){
+    private static List<SeatListResponse> getSeatList(List<Seat> seat) {
         return seat.stream()
                 .map(SeatListResponse::from)
                 .toList();

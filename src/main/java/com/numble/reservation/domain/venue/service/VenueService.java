@@ -30,7 +30,7 @@ public class VenueService {
         return VenueRegisterResponse.from(venue.getVenueId());
     }
 
-    public Venue findVenueById(Long id){
+    public Venue findVenueById(Long id) {
         return venueRepository.findById(id)
                 .orElseThrow(() -> new VenueNotFoundException(ErrorCode.VENUE_NOT_FOUND));
     }

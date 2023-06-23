@@ -16,7 +16,7 @@ public class VenueController {
     private final VenueService venueService;
 
     @PostMapping({"/{email}"})
-    public ResponseEntity<VenueRegisterResponse> register(@Valid @RequestBody VenueRegisterRequest request, @PathVariable String email){
+    public ResponseEntity<VenueRegisterResponse> register(@Valid @RequestBody VenueRegisterRequest request, @PathVariable String email) {
         VenueRegisterResponse response = venueService.registerVenue(request, email);
         return ResponseEntity.status(HttpStatus.CREATED).body(response);
     }

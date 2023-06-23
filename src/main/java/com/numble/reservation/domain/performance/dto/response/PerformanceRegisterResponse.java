@@ -7,7 +7,7 @@ import lombok.Builder;
 public record PerformanceRegisterResponse(
         Long id
 ) {
-    public static PerformanceRegisterResponse from(Long id){
+    public static PerformanceRegisterResponse from(Long id) {
         return PerformanceRegisterResponse.builder()
                 .id(id)
                 .build();
