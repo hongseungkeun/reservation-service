@@ -2,6 +2,7 @@ package com.numble.reservation.domain.user.common.controller;
 
 import com.numble.reservation.domain.user.dto.request.UserJoinRequest;
 import com.numble.reservation.domain.user.dto.response.UserJoinResponse;
+import com.numble.reservation.domain.user.dto.response.UserLoginResponse;
 import com.numble.reservation.domain.user.service.UserService;
 import com.numble.reservation.domain.user.dto.request.UserLoginRequest;
 import jakarta.validation.Valid;
@@ -28,8 +29,8 @@ public class CommonUserController {
     }
 
     @PostMapping("/login")
-    public ResponseEntity<Void> login(@Valid @RequestBody UserLoginRequest request) {
-        userService.loginUser(request);
-        return ResponseEntity.ok().build();
+    public ResponseEntity<UserLoginResponse> login(@Valid @RequestBody UserLoginRequest request) {
+        UserLoginResponse response = userService.loginUser(request);
+        return ResponseEntity.ok(response);
     }
 }
