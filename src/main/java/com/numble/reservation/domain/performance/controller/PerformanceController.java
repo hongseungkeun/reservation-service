@@ -5,6 +5,7 @@ import com.numble.reservation.domain.performance.dto.response.PerformanceListRes
 import com.numble.reservation.domain.performance.dto.response.PerformanceRegisterResponse;
 import com.numble.reservation.domain.performance.dto.response.PerformanceSeatListResponse;
 import com.numble.reservation.domain.performance.service.PerformanceService;
+import com.numble.reservation.global.security.UserPrincipal;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Page;
@@ -13,6 +14,7 @@ import org.springframework.data.domain.Sort;
 import org.springframework.data.web.PageableDefault;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
@@ -21,9 +23,9 @@ import org.springframework.web.bind.annotation.*;
 public class PerformanceController {
     private final PerformanceService performanceService;
 
-    @PostMapping("/{email}")
-    public ResponseEntity<PerformanceRegisterResponse> register(@Valid @RequestBody PerformanceRegisterRequest request, @PathVariable String email) {
-        PerformanceRegisterResponse response = performanceService.registerPerformance(request, email);
+    @PostMapping
+    public ResponseEntity<PerformanceRegisterResponse> register(@Valid @RequestBody PerformanceRegisterRequest request, @AuthenticationPrincipal UserPrincipal.BusinessUserPrincipal user) {
+        PerformanceRegisterResponse response = performanceService.registerPerformance(request, user.getUser());
         return ResponseEntity.status(HttpStatus.CREATED).body(response);
     }
 

@@ -24,8 +24,8 @@ public class VenueService {
     private final VenueRepository venueRepository;
 
     @Transactional
-    public VenueRegisterResponse registerVenue(VenueRegisterRequest request, String email) {
-        Venue venue = venueRepository.save(request.toVenue((BusinessUser) userService.findUserByEmail(email)));
+    public VenueRegisterResponse registerVenue(VenueRegisterRequest request, BusinessUser user) {
+        Venue venue = venueRepository.save(request.toVenue(user));
         seatService.save(request.seats(), venue);
         return VenueRegisterResponse.from(venue.getVenueId());
     }

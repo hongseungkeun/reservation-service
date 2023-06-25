@@ -32,9 +32,9 @@ public class PerformanceService {
     private final PerformanceRepository performanceRepository;
 
     @Transactional
-    public PerformanceRegisterResponse registerPerformance(PerformanceRegisterRequest request, String email) {
+    public PerformanceRegisterResponse registerPerformance(PerformanceRegisterRequest request, BusinessUser user) {
         Venue venue = venueService.findVenueById(request.venueId());
-        Performance performance = performanceRepository.save(request.toPerformance((BusinessUser) userService.findUserByEmail(email), venue));
+        Performance performance = performanceRepository.save(request.toPerformance(user, venue));
         return PerformanceRegisterResponse.from(performance.getPerformanceId());
     }
 
@@ -51,7 +51,7 @@ public class PerformanceService {
         return PerformanceSeatListResponse.from(performance);
     }
 
-    private Performance findPerformanceById(Long performanceId) {
+    public Performance findPerformanceById(Long performanceId) {
         return performanceRepository.findById(performanceId)
                 .orElseThrow(() -> new PerformanceNotFoundException(ErrorCode.PERFORMANCE_NOT_FOUND));
     }
