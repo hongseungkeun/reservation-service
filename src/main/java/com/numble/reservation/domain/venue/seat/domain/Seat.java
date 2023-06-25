@@ -1,5 +1,6 @@
 package com.numble.reservation.domain.venue.seat.domain;
 
+import com.numble.reservation.domain.reservation.domain.Reservation;
 import com.numble.reservation.domain.venue.domain.Venue;
 import com.numble.reservation.domain.venue.seat.data.Status;
 import jakarta.persistence.*;
@@ -28,6 +29,10 @@ public class Seat {
     @JoinColumn(name = "venue_id")
     private Venue venue;
 
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "reservation_id")
+    private Reservation reservation;
+
     @Builder
     public Seat(String seatNumber,
                 Status status,
@@ -37,5 +42,9 @@ public class Seat {
         this.status = status;
         this.seatType = seatType;
         this.venue = venue;
+    }
+
+    public void seatChangeOccupied(){
+        this.status = Status.OCCUPIED;
     }
 }
