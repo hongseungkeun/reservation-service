@@ -33,8 +33,7 @@ public class Reservation {
     @JoinColumn(name = "performance_id")
     @OnDelete(action = OnDeleteAction.CASCADE)
     private Performance performance;
-    @OneToMany
-    @JoinColumn(name = "reservation_Id")
+    @OneToMany(mappedBy = "reservation")
     private List<Seat> seats = new ArrayList<>();
 
     @Builder
