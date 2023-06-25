@@ -13,7 +13,7 @@ public class BusinessUser {
     private Long userId;
     @Embedded
     private UserInfo userInfo;
-    @Column(nullable = false, length = 12)
+    @Column(unique = true, nullable = false, length = 12)
     private String businessLicense;
 
     @Builder
