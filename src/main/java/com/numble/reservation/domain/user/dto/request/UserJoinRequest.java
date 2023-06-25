@@ -7,6 +7,7 @@ import com.numble.reservation.domain.user.common.domain.CommonUser;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Size;
+import org.springframework.security.crypto.password.PasswordEncoder;
 
 public record UserJoinRequest(
         @NotBlank
@@ -22,23 +23,23 @@ public record UserJoinRequest(
         String businessLicense,
         @NotNull Role type
 ) {
-    public CommonUser toCommonUser() {
+    public CommonUser toCommonUser(PasswordEncoder passwordEncoder) {
         return CommonUser.builder()
                 .userInfo(UserInfo.builder()
                         .name(this.name)
                         .email(this.email)
-                        .password(this.password)
+                        .password(passwordEncoder.encode(this.password))
                         .type(this.type)
                         .build())
                 .build();
     }
 
-    public BusinessUser toBusinessUser() {
+    public BusinessUser toBusinessUser(PasswordEncoder passwordEncoder) {
         return BusinessUser.builder()
                 .userInfo(UserInfo.builder()
                         .name(this.name)
                         .email(this.email)
-                        .password(this.password)
+                        .password(passwordEncoder.encode(this.password))
                         .type(this.type)
                         .build())
                 .businessLicense(this.businessLicense)
