@@ -1,5 +1,6 @@
 package com.numble.reservation.global.filter;
 
+import com.numble.reservation.domain.user.data.Role;
 import com.numble.reservation.global.security.JwtTokenProvider;
 import jakarta.servlet.FilterChain;
 import jakarta.servlet.ServletException;
@@ -21,7 +22,8 @@ public class JwtAuthenticationFilter extends GenericFilterBean {
     public void doFilter(ServletRequest request, ServletResponse response, FilterChain chain) throws IOException, ServletException {
         String token = jwtTokenProvider.resolveToken((HttpServletRequest) request);
         if (token != null && jwtTokenProvider.validateToken(token)) {
-            Authentication authentication = jwtTokenProvider.getAuthentication(token);
+            Role userRole = Role.valueOf(jwtTokenProvider.getUserRole(token));
+            Authentication authentication = jwtTokenProvider.getAuthentication(token, userRole);
             SecurityContextHolder.getContext().setAuthentication(authentication);
         }
         chain.doFilter(request, response);

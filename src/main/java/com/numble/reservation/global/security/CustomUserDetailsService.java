@@ -9,7 +9,6 @@ import com.numble.reservation.global.exception.error.ErrorCode;
 import lombok.AccessLevel;
 import lombok.NoArgsConstructor;
 import lombok.RequiredArgsConstructor;
-import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.stereotype.Service;
@@ -20,7 +19,6 @@ public class CustomUserDetailsService {
     @Service
     @RequiredArgsConstructor
     @Transactional(readOnly = true)
-    @Qualifier("commonUserDetailsService")
     public static class CommonUserDetailsService implements UserDetailsService {
         private final CommonUserRepository commonUserRepository;
 
@@ -38,7 +36,6 @@ public class CustomUserDetailsService {
     @Service
     @RequiredArgsConstructor
     @Transactional(readOnly = true)
-    @Qualifier("businessUserDetailsService")
     public static class BusinessUserDetailsService implements UserDetailsService {
         private final BusinessUserRepository businessUserRepository;
 
