@@ -24,7 +24,6 @@ import java.util.Map;
 @RequiredArgsConstructor
 public class JwtTokenProvider {
     private final Map<String, UserDetailsService> userDetailsServiceMap;
-    private final long TOKEN_VALID_TIME = 30 * 60 * 1000L;
     private String SECRET_KEY = "ReservationJwtUserAccessTokenSecretKey";
 
     @PostConstruct
@@ -33,10 +32,11 @@ public class JwtTokenProvider {
     }
 
     public String createToken(String userEmail, Role role) {
+        final long tokenValidTime = 30 * 60 * 1000L;
         Claims claims = Jwts.claims().setSubject(userEmail);
         claims.put("role", role);
         Date now = new Date();
-        Date expiredTime = new Date(now.getTime() + TOKEN_VALID_TIME);
+        Date expiredTime = new Date(now.getTime() + tokenValidTime);
         return Jwts.builder()
                 .setClaims(claims)
                 .setIssuedAt(now)
