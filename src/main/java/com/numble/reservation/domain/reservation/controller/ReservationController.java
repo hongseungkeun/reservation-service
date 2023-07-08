@@ -20,7 +20,7 @@ public class ReservationController {
     @PostMapping("/{performanceId}")
     public ResponseEntity<ReservationCreateResponse> create(@PathVariable Long performanceId, @Valid @RequestBody ReservationCreateRequest request,
                                                             @AuthenticationPrincipal UserPrincipal.CommonUserPrincipal user){
-        ReservationCreateResponse response = reservationsService.createReservation(performanceId, request, user.getUser());
+        ReservationCreateResponse response = reservationsService.createReservation(performanceId, request, user.user());
         return ResponseEntity.status(HttpStatus.CREATED).body(response);
     }
 }

@@ -10,19 +10,12 @@ import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 
 import java.util.Collection;
-import java.util.Collections;
 import java.util.List;
 
 @NoArgsConstructor(access = AccessLevel.PRIVATE)
 public class UserPrincipal {
-    public static class CommonUserPrincipal implements UserDetails {
-        private final CommonUser user;
-
-        @Builder
-        public CommonUserPrincipal(CommonUser user) {
-            this.user = user;
-        }
-
+    @Builder(access = AccessLevel.PUBLIC)
+    public record CommonUserPrincipal(CommonUser user) implements UserDetails {
         @Override
         public Collection<? extends GrantedAuthority> getAuthorities() {
             return List.of(new SimpleGrantedAuthority(user.getUserInfo().getType().toString()));
@@ -56,21 +49,11 @@ public class UserPrincipal {
         @Override
         public boolean isEnabled() {
             return false;
-        }
-
-        public CommonUser getUser(){
-            return user;
         }
     }
 
-    public static class BusinessUserPrincipal implements UserDetails {
-        private final BusinessUser user;
-
-        @Builder
-        public BusinessUserPrincipal(BusinessUser user) {
-            this.user = user;
-        }
-
+    @Builder(access = AccessLevel.PUBLIC)
+    public record BusinessUserPrincipal(BusinessUser user) implements UserDetails {
         @Override
         public Collection<? extends GrantedAuthority> getAuthorities() {
             return List.of(new SimpleGrantedAuthority(user.getUserInfo().getType().toString()));
@@ -104,10 +87,6 @@ public class UserPrincipal {
         @Override
         public boolean isEnabled() {
             return false;
-        }
-
-        public BusinessUser getUser(){
-            return user;
         }
     }
 }

@@ -25,7 +25,7 @@ public class PerformanceController {
 
     @PostMapping
     public ResponseEntity<PerformanceRegisterResponse> register(@Valid @RequestBody PerformanceRegisterRequest request, @AuthenticationPrincipal UserPrincipal.BusinessUserPrincipal user) {
-        PerformanceRegisterResponse response = performanceService.registerPerformance(request, user.getUser());
+        PerformanceRegisterResponse response = performanceService.registerPerformance(request, user.user());
         return ResponseEntity.status(HttpStatus.CREATED).body(response);
     }
 

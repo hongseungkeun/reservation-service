@@ -22,7 +22,7 @@ public class VenueController {
 
     @PostMapping
     public ResponseEntity<VenueRegisterResponse> register(@Valid @RequestBody VenueRegisterRequest request, @AuthenticationPrincipal UserPrincipal.BusinessUserPrincipal user) {
-        VenueRegisterResponse response = venueService.registerVenue(request, user.getUser());
+        VenueRegisterResponse response = venueService.registerVenue(request, user.user());
         return ResponseEntity.status(HttpStatus.CREATED).body(response);
     }
 }
